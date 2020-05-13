@@ -9,7 +9,9 @@ HTTP Langugage Translation API.  Currently uses redis to persist translations.
 Python 3.7+ (https://www.python.org/downloads/)
 Docker 18+ (https://docs.docker.com/engine/install/ubuntu/)
 
-# Build Dev
+# Building
+
+## Build Dev
 
 Build pip dependencies dev
 
@@ -17,7 +19,7 @@ Build pip dependencies dev
 make build-dev
 ```
 
-# Build Production
+## Build Production
 
 Build pip dependencies production
 
@@ -25,13 +27,15 @@ Build pip dependencies production
 make build
 ```
 
-# Running Development Mode
+# Running
+
+## Running Development Mode
 
 ```
 make run HOST=<host ip or 0.0.0.0>
 ```
 
-# Running Production Deployment
+## Running Production Deployment
 
 <Todo>
 
