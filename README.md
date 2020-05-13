@@ -23,7 +23,7 @@ Add new translation:
 
 ```
 
-Delete trasnlation:
+Delete translation:
 ```
 
 ```
