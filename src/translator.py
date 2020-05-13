@@ -4,7 +4,7 @@ import json
 import os
 import redis
 
-import redis_wrapper
+from src import redis_wrapper
 
 app = Flask(__name__)
 

@@ -1,7 +1,7 @@
 import logging
 import redis
 import time
-from helpers import GracefulKiller
+from src.helpers import GracefulKiller
 import sys
 import os
 
