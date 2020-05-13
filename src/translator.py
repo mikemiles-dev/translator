@@ -24,6 +24,8 @@ def index():
     return json.dumps({"service": "translate",
                        "version": os.getenv('TRANSLATE_API_VER')})
 
+def validate(word):
+    return ''.join(e for e in word if e.isalnum())
 
 @app.route('/translate/<from_language>/<to_language>/<word>/', methods=["GET"])
 def translate(from_language, to_language, word):
@@ -31,6 +33,8 @@ def translate(from_language, to_language, word):
         rdb = redis_wrapper.new_redis_connection()
     except redis.exceptions.ConnectionError:
         return json.dumps({"error": "redis down"}), 500
+    if validate(word) is '':
+        return json.dumps({"error": "invalid input"}), 400
     key = [from_language.lower(),
            to_language.lower(),
            word.lower()]
@@ -50,6 +54,8 @@ def add(from_language, to_language, word, translation):
         rdb = redis_wrapper.new_redis_connection()
     except redis.exceptions.ConnectionError:
         return json.dumps({"error": "redis down"}), 500
+    if validate(word) is '':
+        return json.dumps({"error": "invalid input"}), 400
     key = '-'.join([from_language.lower(),
                     to_language.lower(),
                     word.lower()])
