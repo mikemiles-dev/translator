@@ -53,7 +53,10 @@ def add(from_language, to_language, word, translation):
     key = '-'.join([from_language.lower(),
                     to_language.lower(),
                     word.lower()])
-    rdb.set(key, translation)
+    try:
+        rdb.set(key, translation)
+    except (ConnectionError, TimeoutError) as redis_error:
+        return json.dumps({"error": str(redis_error)}), 500
     return json.dumps({"status": "success"})
 
 
@@ -67,5 +70,8 @@ def delete(from_language, to_language, word):
     key = '-'.join([from_language.lower(),
                     to_language.lower(),
                     word.lower()])
-    rdb.delete(key)
+    try:
+        rdb.delete(key)
+    except (ConnectionError, TimeoutError) as redis_error:
+        return json.dumps({"error": str(redis_error)}), 500
     return json.dumps({"status": "success"})
