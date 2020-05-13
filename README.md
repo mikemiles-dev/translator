@@ -2,7 +2,7 @@
 Language Translation API
 
 # Description
-HTTP Langugage Translation API.
+HTTP Langugage Translation API.  Currently uses redis to persist translations.
 
 # Requirments
 
