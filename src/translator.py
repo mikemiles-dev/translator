@@ -55,7 +55,7 @@ def translate(from_language, to_language, word):
            word.lower()]
     try:
         translation = rdb.get('-'.join(key))
-    except (ConnectionError, TimeoutError) as redis_error:
+    except (ConnectionError, TimeoutError):
         return json.dumps({"error": "redis server error, contact admin"}), 500
     if not translation:
         abort(404)
@@ -83,7 +83,7 @@ def add(from_language, to_language, word, translation):
                     word.lower()])
     try:
         rdb.set(key, translation)
-    except (ConnectionError, TimeoutError) as redis_error:
+    except (ConnectionError, TimeoutError):
         return json.dumps({"error": "redis server error, contact admin"}), 500
     return json.dumps({"status": "success"})
 
@@ -104,6 +104,6 @@ def delete(from_language, to_language, word):
                     word.lower()])
     try:
         rdb.delete(key)
-    except (ConnectionError, TimeoutError) as redis_error:
+    except (ConnectionError, TimeoutError):
         return json.dumps({"error": "redis server error, contact admin"}), 500
     return json.dumps({"status": "success"})
