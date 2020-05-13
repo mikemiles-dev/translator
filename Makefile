@@ -9,3 +9,6 @@ build:
 run: build
 	@echo Running Version ${VERSION}
 	flask run --host=$(HOST)
+
+test:
+	@echo Todo Add Unit Tests
