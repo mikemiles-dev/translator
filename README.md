@@ -68,7 +68,7 @@ for example:
 /translate/english/spanish/library/
 ```
 
-yields:
+yields if the translation exists:
 ```
 {"translation": "bibliotheca"}
 ```
