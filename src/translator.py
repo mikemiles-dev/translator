@@ -22,6 +22,11 @@ log.setLevel(logging.INFO)
 SUPPORTED_LANGUAGES = ('english', 'spanish')
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return json.dumps({"error": "not found"}), 404
+
+
 @app.route('/')
 def index():
     return json.dumps({"service": "translate",

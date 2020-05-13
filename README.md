@@ -73,6 +73,8 @@ yields if the translation exists:
 {"translation": "bibliotheca"}
 ```
 
+otherwise if no translation exists you will receive a 404
+
 ---
 
 * Add new translation (**HTTP POST REQUEST**):
