@@ -2,9 +2,9 @@ from flask import Flask, abort
 import logging
 import json
 import os
+import redis
 
 import redis_wrapper
-
 
 app = Flask(__name__)
 
@@ -27,7 +27,10 @@ def index():
 
 @app.route('/translate/<from_language>/<to_language>/<word>/', methods=["GET"])
 def translate(from_language, to_language, word):
-    rdb = redis_wrapper.new_redis_connection()
+    try:
+        rdb = redis_wrapper.new_redis_connection()
+    except redis.exceptions.ConnectionError:
+        return json.dumps({"error": "redis down"}), 500
     key = [from_language.lower(),
            to_language.lower(),
            word.lower()]
@@ -41,7 +44,10 @@ def translate(from_language, to_language, word):
 @app.route('/translate/<from_language>/<to_language>/<word>/<translation>/',
            methods=["POST"])
 def add(from_language, to_language, word, translation):
-    rdb = redis_wrapper.new_redis_connection()
+    try:
+        rdb = redis_wrapper.new_redis_connection()
+    except redis.exceptions.ConnectionError:
+        return json.dumps({"error": "redis down"}), 500
     key = '-'.join([from_language.lower(),
                     to_language.lower(),
                     word.lower()])
@@ -52,7 +58,10 @@ def add(from_language, to_language, word, translation):
 @app.route('/translate/<from_language>/<to_language>/<word>/',
            methods=["DELETE"])
 def delete(from_language, to_language, word):
-    rdb = redis_wrapper.new_redis_connection()
+    try:
+        rdb = redis_wrapper.new_redis_connection()
+    except redis.exceptions.ConnectionError:
+        return json.dumps({"error": "redis down"}), 500
     key = '-'.join([from_language.lower(),
                     to_language.lower(),
                     word.lower()])

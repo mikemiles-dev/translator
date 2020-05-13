@@ -26,15 +26,18 @@ def new_redis_connection():
     log.info("Connecting to redis: %s", redis_url)
     redis_pool = redis.connection.ConnectionPool.from_url(redis_url)
     rdb = redis.Redis(connection_pool=redis_pool)
-    while True:
+    count = 0
+    max_retries = 5
+    while count < max_retries:
         if _killer.kill_now:
             sys.exit(1)
 
         try:
             if rdb.ping():
-                break
+                return rdb
         except redis.exceptions.ConnectionError as redis_error:
             log.error(redis_error)
         log.error("Cannot connect to redis, retrying...")
         time.sleep(5)
-    return rdb
+        count = count + 1
+    raise redis.exceptions.ConnectionError
