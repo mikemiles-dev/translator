@@ -55,5 +55,6 @@ class BasicTests(unittest.TestCase):
 
     # Todo add more tests for error conditions
 
+
 if __name__ == "__main__":
     unittest.main()
