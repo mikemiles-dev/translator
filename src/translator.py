@@ -35,10 +35,12 @@ def translate(from_language, to_language, word):
            to_language.lower(),
            word.lower()]
     translation = rdb.get('-'.join(key))
-    if translation:
-        return json.dumps({"translation": translation.decode("utf-8")})
-    else:
+    if not translation:
         abort(404)
+    try:
+        return json.dumps({"translation": translation.decode("utf-8")})
+    except Exception as translate_error:
+        return json.dumps({"error": str(translate_error)}), 500
 
 
 @app.route('/translate/<from_language>/<to_language>/<word>/<translation>/',
