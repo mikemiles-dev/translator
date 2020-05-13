@@ -23,6 +23,7 @@ Build pip dependencies production
 
 ```
 make build
+```
 
 # Running Development Mode
 
