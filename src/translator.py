@@ -56,7 +56,7 @@ def translate(from_language, to_language, word):
     try:
         translation = rdb.get('-'.join(key))
     except (ConnectionError, TimeoutError) as redis_error:
-        return json.dumps({"error": str(redis_error)}), 500
+        return json.dumps({"error": "redis server error, containd admin"}), 500
     if not translation:
         abort(404)
     try:
