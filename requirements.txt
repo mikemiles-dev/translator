@@ -1,2 +1,2 @@
-googletrans==2.4.0
 Flask==1.1.2
+redis==3.5.1
