@@ -47,7 +47,7 @@ def translate(from_language, to_language, word):
     if not from_language.lower() in SUPPORTED_LANGUAGES:
         return json.dumps({"error": "invalid from language"}), 400
     if not to_language.lower() in SUPPORTED_LANGUAGES:
-        return json.dumps({"error": "invalid from language"}), 400
+        return json.dumps({"error": "invalid to language"}), 400
     if not validate(word):
         return json.dumps({"error": "invalid input"}), 400
     key = [from_language.lower(),
@@ -72,7 +72,7 @@ def add(from_language, to_language, word, translation):
     if not from_language.lower() in SUPPORTED_LANGUAGES:
         return json.dumps({"error": "invalid from language"}), 400
     if not to_language.lower() in SUPPORTED_LANGUAGES:
-        return json.dumps({"error": "invalid from language"}), 400
+        return json.dumps({"error": "invalid to language"}), 400
     if not validate(word):
         return json.dumps({"error": "invalid input"}), 400
     key = '-'.join([from_language.lower(),
@@ -95,7 +95,7 @@ def delete(from_language, to_language, word):
     if not from_language.lower() in SUPPORTED_LANGUAGES:
         return json.dumps({"error": "invalid from language"}), 400
     if not to_language.lower() in SUPPORTED_LANGUAGES:
-        return json.dumps({"error": "invalid from language"}), 400
+        return json.dumps({"error": "invalid to language"}), 400
     key = '-'.join([from_language.lower(),
                     to_language.lower(),
                     word.lower()])
