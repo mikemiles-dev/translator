@@ -71,6 +71,20 @@ Delete translation (**HTTP DELETE REQUEST**):
 
 ```
 
+# Error conditions
+
+In cases of error you will recieve a payload with an error key and value explaining the error:
+
+```
+/translate/english/spanish/.....
+```
+
+yields
+
+```
+{"error": "invalid input"}
+```
+
 # Tests
 
 To run unit tests:
