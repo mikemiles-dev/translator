@@ -43,7 +43,21 @@ make run HOST=<host ip or 0.0.0.0>
 
 # Routes
 
-Translate a word (**HTTP GET REQUEST**):
+Index Status
+
+```
+/
+```
+
+yields information regarding service such as version and langugages
+
+```
+{"service": "translate", "supported_langugages": ["english", "spanish"], "version": "0.0.1"}
+```
+
+---
+
+* Translate a word (**HTTP GET REQUEST**):
 
 ```
 /translate/<from langugage>/<to language>/<word to translate>/
@@ -59,13 +73,17 @@ yields:
 {"translation": "bibliotheca"}
 ```
 
-Add new translation (**HTTP POST REQUEST**):
+---
+
+* Add new translation (**HTTP POST REQUEST**):
 ```
 /translate/<from langugage>/<to language>/<word to translate>/<translation>/
 
 ```
 
-Delete translation (**HTTP DELETE REQUEST**):
+---
+
+* Delete translation (**HTTP DELETE REQUEST**):
 ```
 /translate/<from langugage>/<to language>/<word to translate>/
 
@@ -91,4 +109,11 @@ To run unit tests:
 
 ```
 make test
+```
+
+# Currently Supported langugages
+
+```
+Spanish
+English
 ```

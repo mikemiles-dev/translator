@@ -18,10 +18,14 @@ log = logging.getLogger(__name__)
 log.addHandler(CONSOLE_HANDLER)
 log.setLevel(logging.INFO)
 
+# Keep lower case for optimal performnce
+SUPPORTED_LANGUAGES = ('english', 'spanish')
+
 
 @app.route('/')
 def index():
     return json.dumps({"service": "translate",
+                       "supported_langugages": SUPPORTED_LANGUAGES,
                        "version": os.getenv('TRANSLATE_API_VER')})
 
 
@@ -35,6 +39,10 @@ def translate(from_language, to_language, word):
         rdb = redis_wrapper.new_redis_connection()
     except redis.exceptions.ConnectionError:
         return json.dumps({"error": "redis down"}), 500
+    if not from_language.lower() in SUPPORTED_LANGUAGES:
+        return json.dumps({"error": "invalid from language"}), 400
+    if not to_language.lower() in SUPPORTED_LANGUAGES:
+        return json.dumps({"error": "invalid from language"}), 400
     if not validate(word):
         return json.dumps({"error": "invalid input"}), 400
     key = [from_language.lower(),
